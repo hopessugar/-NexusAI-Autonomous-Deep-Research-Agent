@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusAI — Autonomous Deep Research Intelligence</title>
+    <meta name="description" content="International-grade autonomous multi-agent research platform that investigates complex topics, generates publication-quality executive reports, and synthesizes data visualizations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+
+    <!-- Decorative sparkles -->
+    <div class="sparkle sparkle-1">✦</div>
+    <div class="sparkle sparkle-2">✦</div>
+    <div class="sparkle sparkle-3">✧</div>
+    <div class="sparkle sparkle-4">✦</div>
+    <div class="sparkle sparkle-5">✧</div>
+    <div class="sparkle sparkle-6">✦</div>
+
+    <div id="app">
+
+        <!-- ═══════ HEADER ═══════ -->
+        <header class="header">
+            <div class="header-left">
+                <div class="logo-mark" onclick="resetDashboard()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="10" stroke="#5a6e58" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="4.5" fill="#5a6e58" opacity="0.6"/>
+                        <circle cx="12" cy="5" r="2" fill="#7c8f7a"/>
+                        <circle cx="18" cy="15.5" r="2" fill="#7c8f7a"/>
+                        <circle cx="6" cy="15.5" r="2" fill="#7c8f7a"/>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-name">NexusAI</span>
+                    <span class="logo-tag">autonomous research intelligence</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="status-pill" id="connectionStatus">
+                    <span class="status-dot"></span>
+                    <span id="connectionStatusText">Ready</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- ═══════ HERO SECTION ═══════ -->
+        <section class="hero" id="heroSection">
+            <div class="hero-card">
+                <div class="hero-top-row">
+                    <span class="hero-date" id="heroDate">September 2026</span>
+                    <span class="hero-time" id="heroTime">10:45 PM</span>
+                </div>
+
+                <div class="hero-avatar">
+                    <div class="avatar-ring">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                            <circle cx="24" cy="24" r="20" stroke="#7c8f7a" stroke-width="2.5" stroke-dasharray="4 3"/>
+                            <circle cx="24" cy="24" r="12" fill="#7c8f7a" opacity="0.15"/>
+                            <path d="M24 16 L28 22 L24 20 L20 22 Z" fill="#5a6e58"/>
+                            <circle cx="24" cy="28" r="5" stroke="#5a6e58" stroke-width="1.5" fill="none"/>
+                            <circle cx="24" cy="28" r="2" fill="#5a6e58"/>
+                        </svg>
+                    </div>
+                </div>
+
+                <p class="hero-label">autonomous multi-agent intelligence</p>
+                <h1 class="hero-title">Deep Research<br>Executive Dossier</h1>
+                <p class="hero-desc">Orchestrate five autonomous AI agents to plan, scrape verified sources, analyze quantitative trends, synthesize publications, and self-critique at an international standard.</p>
+
+                <div class="search-wrap">
+                    <div class="search-field">
+                        <input
+                            type="text"
+                            id="queryInput"
+                            placeholder="Enter any complex research topic, industry, or strategic question..."
+                            autocomplete="off"
+                            spellcheck="false"
+                        >
+                    </div>
+                    <button id="startBtn" class="btn-start" onclick="startResearch()" title="Launch Deep Research">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="chip-row">
+                    <button class="chip" onclick="setQuery(this)">Top EV comparison 2026-2027</button>
+                    <button class="chip" onclick="setQuery(this)">AI in healthcare diagnostics</button>
+                    <button class="chip" onclick="setQuery(this)">Global semiconductor supply chain</button>
+                    <button class="chip" onclick="setQuery(this)">Next-gen solid state batteries</button>
+                </div>
+
+                <!-- Stage Demo Mode: Instant Golden Showcases -->
+                <div class="showcase-strip">
+                    <div class="showcase-strip-label">
+                        <span class="pulse-dot-gold"></span>
+                        <span>⚡ Stage Demo Mode • Instant Zero-Latency Golden Dossier:</span>
+                    </div>
+                    <div class="showcase-buttons">
+                        <button class="showcase-btn" onclick="loadGoldenShowcase('ev')" title="Load Instant Verified Showcase (Zero-Latency)">
+                            <span class="showcase-icon">🚗</span>
+                            <span class="showcase-text">
+                                <strong>Top EV Comparison 2026-2027</strong>
+                                <small>9.2 Rigor • Dual-Host Podcast • 60fps Graph • 74% Conviction</small>
+                            </span>
+                            <span class="showcase-tag">Instant Demo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feature grid -->
+            <div class="feature-grid">
+                <div class="feature-tile">
+                    <div class="tile-icon">📋</div>
+                    <div class="tile-info">
+                        <strong>Planner Agent</strong>
+                        <span>Decomposes inquiry into multi-dimensional angles</span>
+                    </div>
+                </div>
+                <div class="feature-tile">
+                    <div class="tile-icon">🔍</div>
+                    <div class="tile-info">
+                        <strong>Researcher Agent</strong>
+                        <span>Searches & deep-crawls authoritative sources</span>
+                    </div>
+                </div>
+                <div class="feature-tile">
+                    <div class="tile-icon">📊</div>
+                    <div class="tile-info">
+                        <strong>Analyst Agent</strong>
+                        <span>Extracts data points & builds themed charts</span>
+                    </div>
+                </div>
+                <div class="feature-tile">
+                    <div class="tile-icon">✍️</div>
+                    <div class="tile-info">
+                        <strong>Writer Agent</strong>
+                        <span>Drafts comprehensive executive dossier</span>
+                    </div>
+                </div>
+                <div class="feature-tile">
+                    <div class="tile-icon">🔎</div>
+                    <div class="tile-info">
+                        <strong>Critic Agent</strong>
+                        <span>Scores rigor, fact-checks, & verifies quality</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════ DASHBOARD ═══════ -->
+        <section class="dashboard hidden" id="dashboardSection">
+
+            <!-- Research Control Banner -->
+            <div class="query-card">
+                <div class="query-left">
+                    <span class="query-label">research topic</span>
+                    <span class="query-text" id="queryDisplay"></span>
+                </div>
+                <div class="query-meta-actions">
+                    <div class="view-switch-group">
+                        <button class="view-switch-btn active" id="viewModeDossierBtn" onclick="setViewMode('dossier')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                            Full Dossier
+                        </button>
+                        <button class="view-switch-btn" id="viewModeStreamBtn" onclick="setViewMode('stream')">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                            Agent Stream
+                        </button>
+                    </div>
+                    <button class="btn-drawer-toggle" id="drawerToggleBtn" onclick="toggleActivityDrawer()" title="Toggle Agent Activity Drawer">
+                        <span class="live-dot"></span>
+                        <span id="drawerBtnText">Agent Logs</span>
+                        <span class="count-badge" id="eventCount">0</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stepper -->
+            <div class="stepper-card">
+                <div class="step" data-step="planning">
+                    <div class="step-dot"><span>📋</span></div>
+                    <div class="step-name">Plan</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="researching">
+                    <div class="step-dot"><span>🔍</span></div>
+                    <div class="step-name">Research</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="analyzing">
+                    <div class="step-dot"><span>📊</span></div>
+                    <div class="step-name">Analyze</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="writing">
+                    <div class="step-dot"><span>✍️</span></div>
+                    <div class="step-name">Write</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="reviewing">
+                    <div class="step-dot"><span>🔎</span></div>
+                    <div class="step-name">Review</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step" data-step="complete">
+                    <div class="step-dot"><span>✅</span></div>
+                    <div class="step-name">Complete</div>
+                </div>
+            </div>
+
+            <!-- Executive KPI & Metrics Snapshot (Appears when report completes) -->
+            <div class="kpi-grid hidden" id="executiveKpiBar">
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <span class="kpi-icon">🏆</span>
+                        <span class="kpi-badge" id="kpiRigorTag">Verified</span>
+                    </div>
+                    <div class="kpi-val"><span id="kpiScore">9.2</span><span class="kpi-subval">/10</span></div>
+                    <div class="kpi-label">Critic Rigor Index</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <span class="kpi-icon">📚</span>
+                        <span class="kpi-badge">Multi-Source</span>
+                    </div>
+                    <div class="kpi-val" id="kpiSourcesCount">0</div>
+                    <div class="kpi-label">Evidence Citations</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <span class="kpi-icon">⏱️</span>
+                        <span class="kpi-badge">Speed</span>
+                    </div>
+                    <div class="kpi-val" id="kpiReadingTime">~4 min</div>
+                    <div class="kpi-label">Estimated Reading Time</div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-top">
+                        <span class="kpi-icon">🤖</span>
+                        <span class="kpi-badge">Swarm</span>
+                    </div>
+                    <div class="kpi-val">5 Agents</div>
+                    <div class="kpi-label">Autonomous Pipeline</div>
+                </div>
+            </div>
+
+            <!-- Executive Audio Briefing Player (NotebookLM-Style AI Podcast) -->
+            <div class="neu-card audio-briefing-card hidden" id="audioBriefingCard">
+                <div class="audio-main-row">
+                    <div class="audio-controls-left">
+                        <button class="btn-audio-play" id="audioPlayBtn" onclick="toggleAudioBriefing()" title="Play Audio Briefing">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" id="playIconSvg"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        </button>
+                        <div class="audio-info">
+                            <div class="audio-badge-row">
+                                <span class="audio-badge">🎙️ Executive Audio Briefing</span>
+                                <span class="audio-badge-sub">Dual-Host AI Podcast</span>
+                            </div>
+                            <h3 class="audio-headline" id="audioHeadline">Strategic Intelligence Synthesis</h3>
+                            <p class="audio-tagline" id="audioTagline">Synthesized key findings, trade-offs, and critical implications.</p>
+                        </div>
+                    </div>
+
+                    <!-- Waveform & Progress -->
+                    <div class="audio-center-waveform">
+                        <canvas id="waveformCanvas" width="280" height="42"></canvas>
+                        <div class="audio-timing">
+                            <span id="audioCurrentTime">0:00</span>
+                            <span class="time-sep">/</span>
+                            <span id="audioDuration">~1:15</span>
+                        </div>
+                    </div>
+
+                    <!-- Actions & Speed -->
+                    <div class="audio-actions-right">
+                        <div class="speed-selector">
+                            <button class="speed-btn active" onclick="setAudioSpeed(1.0, this)">1x</button>
+                            <button class="speed-btn" onclick="setAudioSpeed(1.25, this)">1.25x</button>
+                            <button class="speed-btn" onclick="setAudioSpeed(1.5, this)">1.5x</button>
+                        </div>
+                        <button class="action-btn" onclick="toggleTranscriptDrawer()" id="transcriptToggleBtn" title="Toggle Interactive Dialogue Transcript">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                            <span>Transcript</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Synchronized Dialogue Drawer (Karaoke highlighting) -->
+                <div class="audio-transcript-drawer hidden" id="audioTranscriptDrawer">
+                    <div class="transcript-header">
+                        <span>Interactive Dialogue Script (Click any line to play)</span>
+                        <span class="speakers-legend">
+                            <span class="speaker-tag alex">Alex (Host)</span>
+                            <span class="speaker-tag morgan">Morgan (Lead Analyst)</span>
+                        </span>
+                    </div>
+                    <div class="transcript-list" id="transcriptList"></div>
+                </div>
+            </div>
+
+            <!-- Adversarial Bull vs Bear Debate & Conviction Matrix -->
+            <div class="neu-card debate-card hidden" id="debatePanel">
+                <div class="card-head">
+                    <div class="debate-head-title">
+                        <h2>⚖️ Adversarial Multi-Agent Debate & Conviction Matrix</h2>
+                        <span class="section-tag">Optimist vs. Skeptic Agents</span>
+                    </div>
+                    <div class="card-actions">
+                        <span class="conviction-pill" id="convictionPill">74% Bullish Bias</span>
+                    </div>
+                </div>
+
+                <!-- Conviction Meter Bar -->
+                <div class="conviction-meter-wrap">
+                    <div class="meter-labels">
+                        <span class="meter-label-left">🐻 Bearish Headwinds</span>
+                        <span class="meter-verdict" id="debateVerdict">Evaluating market conviction...</span>
+                        <span class="meter-label-right">🐂 Bullish Growth</span>
+                    </div>
+                    <div class="conviction-track">
+                        <div class="conviction-fill" id="convictionFill" style="width: 74%;"></div>
+                        <div class="conviction-needle" id="convictionNeedle" style="left: 74%;"></div>
+                    </div>
+                </div>
+
+                <!-- Split Debate Columns -->
+                <div class="debate-grid">
+                    <!-- Bull Card -->
+                    <div class="thesis-card bull-card">
+                        <div class="thesis-header">
+                            <div class="thesis-avatar">🐂</div>
+                            <div class="thesis-title-wrap">
+                                <span class="thesis-role">Optimist Agent • Thesis</span>
+                                <h3 id="bullThesisTitle">Structural Market Growth</h3>
+                            </div>
+                            <span class="thesis-score bull" id="bullScore">8.4 / 10</span>
+                        </div>
+                        <div class="thesis-body">
+                            <span class="thesis-list-title">Core Growth Catalysts:</span>
+                            <ul class="catalyst-list" id="bullCatalystsList"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Bear Card -->
+                    <div class="thesis-card bear-card">
+                        <div class="thesis-header">
+                            <div class="thesis-avatar">🐻</div>
+                            <div class="thesis-title-wrap">
+                                <span class="thesis-role">Skeptic Agent • Counter-Thesis</span>
+                                <h3 id="bearThesisTitle">Adoption Friction & Risks</h3>
+                            </div>
+                            <span class="thesis-score bear" id="bearScore">5.9 / 10</span>
+                        </div>
+                        <div class="thesis-body">
+                            <span class="thesis-list-title">Critical Headwinds & Bottlenecks:</span>
+                            <ul class="headwind-list" id="bearHeadwindsList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main grid (adapts to full-page dossier or split stream) -->
+            <div class="dash-grid full-page" id="dashGrid">
+
+                <!-- Activity feed (Collapsible drawer or split column) -->
+                <div class="neu-card activity-card" id="activityCard">
+                    <div class="card-head">
+                        <h2><span class="live-dot"></span> Autonomous Execution Log</h2>
+                        <div class="card-actions">
+                            <span class="count-badge" id="eventCountBadge">0 events</span>
+                            <button class="icon-btn" onclick="toggleActivityDrawer()" title="Close Drawer">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="activity-feed" id="activityFeed">
+                        <div class="feed-placeholder">
+                            <div class="loader"></div>
+                            <p>Agents initializing research session...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Report Workspace (Expands to FULL PAGE) -->
+                <div class="neu-card report-card full-page-report" id="reportCard">
+                    <div class="card-head report-head">
+                        <div class="report-head-left">
+                            <div class="report-title-meta">
+                                <h2>Executive Research Dossier</h2>
+                                <span class="report-meta-chip" id="reportMetaChip">Autonomous Synthesis</span>
+                            </div>
+                        </div>
+
+                        <!-- Action Toolbar -->
+                        <div class="card-actions report-actions">
+                            <!-- Table of contents dropdown toggle -->
+                            <div class="toc-wrapper hidden" id="tocWrapper">
+                                <button class="action-btn" id="tocToggleBtn" onclick="toggleTocMenu()" title="Table of Contents">
+                                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                                    <span>Contents</span>
+                                </button>
+                                <div class="toc-dropdown hidden" id="tocDropdown">
+                                    <div class="toc-dropdown-header">Document Navigation</div>
+                                    <ul class="toc-list" id="tocList"></ul>
+                                </div>
+                            </div>
+
+                            <!-- Quality badge -->
+                            <span class="score-badge hidden" id="qualityBadge">
+                                <span id="qualityScore">0</span>/10 Rigor
+                            </span>
+
+                            <!-- PDF Export -->
+                            <button class="action-btn hidden" id="exportPdfBtn" onclick="exportToPdf()" title="Print / Save as Executive PDF">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                                <span>PDF</span>
+                            </button>
+
+                            <!-- Markdown Download -->
+                            <button class="action-btn hidden" id="exportMdBtn" onclick="downloadMarkdown()" title="Download Markdown Document">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <span>MD</span>
+                            </button>
+
+                            <!-- Copy report -->
+                            <button class="action-btn hidden" id="copyBtn" onclick="copyReport()" title="Copy Full Report">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                                <span id="copyBtnText">Copy</span>
+                            </button>
+
+                            <!-- Executive Pitch Deck Presentation -->
+                            <button class="action-btn presentation-btn hidden" id="presentationBtn" onclick="openPresentationDeck()" title="Launch Executive Pitch Slide Deck">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                                <span>Pitch Deck</span>
+                            </button>
+
+                            <!-- Zen Fullscreen Reading Mode -->
+                            <button class="icon-btn" id="focusModeBtn" onclick="toggleFocusMode()" title="Zen / Fullscreen Reading Mode">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Full-Page Report Document Flow -->
+                    <div class="report-body full-page-body" id="reportContent">
+                        <div class="report-empty">
+                            <div class="pulsing-dossier-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+                                </svg>
+                            </div>
+                            <h3>Awaiting Autonomous Synthesis</h3>
+                            <p>The multi-agent swarm is currently investigating sources and drafting sections.<br>Once the Writer and Critic agents complete, the full dossier will render across this page.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semantic Knowledge & Entity Graph Studio -->
+            <div class="neu-card graph-card hidden" id="knowledgeGraphPanel">
+                <div class="card-head">
+                    <div class="graph-head-title">
+                        <h2>🕸️ Semantic Knowledge & Entity Relationship Graph</h2>
+                        <span class="section-tag">Interactive Force Topology</span>
+                    </div>
+                    <div class="card-actions">
+                        <span class="count-badge" id="graphNodesCount">0 Entities</span>
+                        <span class="count-badge" id="graphEdgesCount">0 Relations</span>
+                        <button class="action-btn" onclick="resetGraphPhysics()" title="Reset Physics Layout">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                            <span>Reset Physics</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="graph-toolbar">
+                    <div class="graph-filters" id="graphFilters">
+                        <button class="filter-chip active" onclick="filterGraph('all', this)">All Entities</button>
+                        <button class="filter-chip" onclick="filterGraph('Company', this)">Companies</button>
+                        <button class="filter-chip" onclick="filterGraph('Technology', this)">Technologies</button>
+                        <button class="filter-chip" onclick="filterGraph('Benchmark', this)">Benchmarks</button>
+                        <button class="filter-chip" onclick="filterGraph('Market Driver', this)">Drivers</button>
+                    </div>
+                    <div class="graph-hint">
+                        <span>💡 Drag nodes to rearrange • Hover to inspect connections • Click to view entity profile</span>
+                    </div>
+                </div>
+
+                <div class="graph-canvas-container" id="graphCanvasContainer">
+                    <canvas id="graphCanvas"></canvas>
+
+                    <!-- Entity Profile Inspector (appears when clicking a node) -->
+                    <div class="entity-inspector-card hidden" id="entityInspector">
+                        <div class="inspector-header">
+                            <div class="inspector-title-wrap">
+                                <span class="inspector-type" id="inspectorType">Entity</span>
+                                <h4 id="inspectorName">Entity Name</h4>
+                            </div>
+                            <button class="icon-btn-sm" onclick="closeEntityInspector()">✕</button>
+                        </div>
+                        <p class="inspector-desc" id="inspectorDesc">Detailed entity description extracted by Analyst agent.</p>
+                        <div class="inspector-connections">
+                            <span class="inspector-conn-title">Connected Relationships:</span>
+                            <ul class="inspector-conn-list" id="inspectorConnectionsList"></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts & Data Visualizations (Aesthetic Grid) -->
+            <div class="neu-card charts-card hidden" id="chartsPanel">
+                <div class="card-head">
+                    <div class="charts-head-title">
+                        <h2>📊 Quantitative Synthesis & Market Visualizations</h2>
+                        <span class="section-tag">UI-Harmonized Aesthetics</span>
+                    </div>
+                </div>
+                <div class="charts-intro-text">
+                    Extracted from cross-source synthesis and rendered with adaptive typography, publication palettes, and thematic harmony.
+                </div>
+                <div class="charts-row" id="chartsGrid"></div>
+            </div>
+
+            <!-- Sources & Verifiable Evidence Directory -->
+            <div class="neu-card sources-card hidden" id="sourcesPanel">
+                <div class="card-head">
+                    <div class="sources-head-title">
+                        <h2>🔗 Verified Citations & Source Evidence Directory</h2>
+                        <span class="count-badge" id="sourceCount">0 citations</span>
+                    </div>
+                </div>
+
+                <!-- Credibility & Protocol Inspector -->
+                <div class="sources-credibility-bar">
+                    <div class="cred-item">
+                        <span class="cred-icon">🛡️</span>
+                        <div class="cred-text">
+                            <strong>100% Cryptographic Verification</strong>
+                            <small>Resolved and authenticated over TLS/HTTPS</small>
+                        </div>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-icon">🌐</span>
+                        <div class="cred-text">
+                            <strong id="credDomainDiversity">Multi-Publisher Distribution</strong>
+                            <small>Balanced cross-domain synthesis</small>
+                        </div>
+                    </div>
+                    <div class="cred-item">
+                        <span class="cred-icon">⚖️</span>
+                        <div class="cred-text">
+                            <strong>Critic Fact-Checked</strong>
+                            <small>Verified against empirical benchmarks</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sources-row" id="sourcesGrid"></div>
+            </div>
+
+            <!-- Restart & Action Bar -->
+            <div class="restart-area hidden" id="newResearchSection">
+                <button class="btn-restart" onclick="resetDashboard()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                    Initiate New Strategic Inquiry
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Grounded Interactive Research Copilot (Floating Dock + Slide-over Drawer) -->
+    <div class="copilot-dock hidden" id="copilotDock" onclick="toggleCopilotDrawer()" title="Open Research Copilot Chat">
+        <div class="copilot-dock-pulse"></div>
+        <div class="copilot-dock-icon">🧠</div>
+        <div class="copilot-dock-text">
+            <span class="copilot-dock-title">Research Copilot</span>
+            <span class="copilot-dock-sub">Grounded Q&A</span>
+        </div>
+    </div>
+
+    <!-- Copilot Slide-Over Drawer -->
+    <div class="copilot-drawer hidden" id="copilotDrawer">
+        <div class="copilot-header">
+            <div class="copilot-header-info">
+                <div class="copilot-avatar">🧠</div>
+                <div class="copilot-header-text">
+                    <h3 class="copilot-title">Research Copilot</h3>
+                    <p class="copilot-sub">Grounded in dossier sources & citations</p>
+                </div>
+            </div>
+            <div class="copilot-header-actions">
+                <button class="icon-btn-sm" onclick="clearCopilotChat()" title="Reset chat history">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                </button>
+                <button class="icon-btn-sm" onclick="toggleCopilotDrawer()" title="Close Copilot">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Suggestion Chips -->
+        <div class="copilot-suggestions-wrap">
+            <span class="suggestions-label">Explore questions:</span>
+            <div class="copilot-suggestions">
+                <button class="suggestion-chip" onclick="askCopilot('What are the top 3 critical risks identified in this report?')">Risks & Bottlenecks</button>
+                <button class="suggestion-chip" onclick="askCopilot('Summarize the quantitative metrics and benchmark comparison.')">Benchmark Summary</button>
+                <button class="suggestion-chip" onclick="askCopilot('What are the primary strategic and investment takeaways?')">Strategic Takeaways</button>
+            </div>
+        </div>
+
+        <!-- Messages Container -->
+        <div class="copilot-messages" id="copilotMessages">
+            <div class="copilot-msg bot">
+                <div class="copilot-bubble">
+                    Hello! I'm your interactive <strong>Research Copilot</strong>. I am fully grounded in the verified citations, benchmark data, and adversarial debate of this dossier. What strategic questions can I answer for you?
+                </div>
+                <span class="copilot-msg-time">Just now</span>
+            </div>
+        </div>
+
+        <!-- Input Box -->
+        <div class="copilot-input-area">
+            <form id="copilotForm" onsubmit="handleCopilotSubmit(event)">
+                <div class="copilot-input-wrap">
+                    <input type="text" id="copilotInput" placeholder="Ask a grounded question about this dossier..." autocomplete="off">
+                    <button type="submit" id="copilotSendBtn" class="copilot-send-btn" title="Send question">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Chart Lightbox Modal -->
+    <div class="modal-overlay hidden" id="chartModal" onclick="closeChartModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <h3 id="modalChartTitle">Data Visualization</h3>
+                <button class="icon-btn modal-close-btn" onclick="closeChartModal()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="modalChartImage" src="" alt="High resolution chart">
+            </div>
+            <div class="modal-footer">
+                <button class="action-btn" id="modalDownloadBtn">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    Download High-Res PNG
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tier 3: Executive Pitch Slide Deck Modal -->
+    <div class="modal-overlay hidden" id="presentationModal" onclick="closePresentationDeck(event)">
+        <div class="presentation-container" onclick="event.stopPropagation()">
+            <!-- Presentation Header -->
+            <div class="presentation-header">
+                <div class="presentation-header-left">
+                    <span class="pres-badge">🏆 Executive Pitch Deck</span>
+                    <h3 class="pres-title" id="presHeaderTitle">Strategic Intelligence Dossier</h3>
+                </div>
+                <div class="presentation-header-right">
+                    <span class="slide-counter" id="slideCounter">Slide 1 / 5</span>
+                    <button class="icon-btn" onclick="togglePresentationFullscreen()" title="Toggle Fullscreen">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                    </button>
+                    <button class="icon-btn modal-close-btn" onclick="closePresentationDeck()" title="Exit Presentation">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Slide Progress Bar -->
+            <div class="slide-progress-track">
+                <div class="slide-progress-fill" id="slideProgressFill" style="width: 20%;"></div>
+            </div>
+
+            <!-- Slides Track / Viewport -->
+            <div class="slides-viewport" id="slidesViewport">
+                <!-- Slide 1: Cover & Rigor Snapshot -->
+                <div class="slide-pane active" id="slide1">
+                    <div class="slide-cover">
+                        <div class="slide-top-meta">
+                            <span class="slide-chip">Autonomous Intelligence Dossier</span>
+                            <span class="slide-chip gold">Judge Evaluation Suite</span>
+                        </div>
+                        <h1 class="slide-main-title" id="presSlideTitle">Strategic Synthesis</h1>
+                        <p class="slide-main-subtitle" id="presSlideSubtitle">Multi-agent deep research investigation across empirical benchmarks and live evidence.</p>
+                        
+                        <div class="slide-kpi-row">
+                            <div class="slide-kpi">
+                                <span class="skpi-val" id="presRigorScore">9.2</span>
+                                <span class="skpi-lbl">Critic Rigor / 10</span>
+                            </div>
+                            <div class="slide-kpi">
+                                <span class="skpi-val" id="presSourcesCount">12</span>
+                                <span class="skpi-lbl">Citations Verified</span>
+                            </div>
+                            <div class="slide-kpi">
+                                <span class="skpi-val">5</span>
+                                <span class="skpi-lbl">Swarm Agents</span>
+                            </div>
+                            <div class="slide-kpi">
+                                <span class="skpi-val" id="presConvictionScore">74%</span>
+                                <span class="skpi-lbl">Net Conviction</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Strategic Insights & Key Takeaways -->
+                <div class="slide-pane" id="slide2">
+                    <div class="slide-content-wrap">
+                        <span class="slide-category">Key Strategic Insights</span>
+                        <h2 class="slide-heading">Primary Market Breakthroughs & Dynamics</h2>
+                        <div class="slide-insights-grid" id="presInsightsGrid"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Adversarial Debate & Conviction Matrix -->
+                <div class="slide-pane" id="slide3">
+                    <div class="slide-content-wrap">
+                        <span class="slide-category">Adversarial Swarm Debate</span>
+                        <h2 class="slide-heading">Bullish Growth vs. Bearish Friction</h2>
+                        <div class="slide-debate-split" id="presDebateSplit"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Quantitative Visualizations -->
+                <div class="slide-pane" id="slide4">
+                    <div class="slide-content-wrap">
+                        <span class="slide-category">Empirical Evidence & Visuals</span>
+                        <h2 class="slide-heading">Market Benchmarks & Quantitative Data</h2>
+                        <div class="slide-charts-wrap" id="presChartsWrap"></div>
+                    </div>
+                </div>
+
+                <!-- Slide 5: Strategic Verdict & Evidence Directory -->
+                <div class="slide-pane" id="slide5">
+                    <div class="slide-content-wrap">
+                        <span class="slide-category">Strategic Horizon</span>
+                        <h2 class="slide-heading">Final Executive Verdict & Actionable Roadmap</h2>
+                        <div class="slide-verdict-card" id="presVerdictCard"></div>
+                        <div class="slide-footer-sources">
+                            <span class="sfs-title">Verified Citation Directory:</span>
+                            <div class="sfs-pills" id="presSourcesPills"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide Footer Controls -->
+            <div class="presentation-footer">
+                <button class="pres-nav-btn" id="presPrevBtn" onclick="prevSlide()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                    <span>Previous</span>
+                </button>
+
+                <div class="slide-dots" id="slideDots">
+                    <button class="slide-dot active" onclick="goToSlide(0)"></button>
+                    <button class="slide-dot" onclick="goToSlide(1)"></button>
+                    <button class="slide-dot" onclick="goToSlide(2)"></button>
+                    <button class="slide-dot" onclick="goToSlide(3)"></button>
+                    <button class="slide-dot" onclick="goToSlide(4)"></button>
+                </div>
+
+                <div class="pres-hints">
+                    <span>[←/→] Navigate • [Space] Advance • [Esc] Exit</span>
+                </div>
+
+                <button class="pres-nav-btn" id="presNextBtn" onclick="nextSlide()">
+                    <span>Next</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Toast Notification -->
+    <div class="toast hidden" id="toastMessage"></div>
+
+    <script src="/static/app.js"></script>
+    <script>
+        // Live clock for the hero
+        function updateClock(){
+            const now = new Date();
+            const d = document.getElementById('heroDate');
+            const t = document.getElementById('heroTime');
+            if(d) d.textContent = now.toLocaleDateString('en-US',{month:'long', day:'numeric', year:'numeric'});
+            if(t) t.textContent = now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+        }
+        updateClock(); setInterval(updateClock, 10000);
+    </script>
+</body>
+</html>
